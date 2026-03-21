@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "keywords": [],
-  "exports":{
+  "exports": {
+    ".": "./src/index.ts",
     "./client": "./src/index.ts"
-  }, 
+  },
   "author": "",
   "devDependencies": {
     "@prisma/client": "6.19.0",
@@ -14,8 +15,9 @@
     "@prisma/config": "^7.5.0",
     "@repo/typescript-config": "workspace:*",
     "prisma": "6.19.0",
+    "tsx": "^4.21.0",
     "typescript": "latest"
   },
   "license": "ISC",
-  "type": "commonjs"
+  "type": "module"
 }
