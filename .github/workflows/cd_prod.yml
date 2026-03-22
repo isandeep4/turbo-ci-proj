@@ -1,0 +1,21 @@
+name: Deploy to staging
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  redeploy_everything:
+    runs-on: ubuntu-latest
+    name: Deploying everything to the prod cluster
+
+    steps:
+      - run: |
+          echo ${{ secrets.SSH_PRIVATE_KEY }} &> ~/ssh_key
+          ssh -i ~/ssh_key root@142.93.149.134
+          cd turbo-ci-proj/ && git pull
+          pnpm install
+          pnpm run build
+          pm2 restart http-server
+          pm2 restart web
+          pm2 restart ws-server
