@@ -1,24 +1,24 @@
-name: Deploy to DO staging
+name: Deploy to DO production
 on:
   push:
     branches:
-      - "main"
+      - "production"
 
 jobs:
   redeploy_everything:
     runs-on: ubuntu-latest
-    name: Deploying everything to the staging cluster
+    name: Deploying everything to the prod cluster
 
     steps:
       - run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           mkdir -p /home/runner/.ssh
           chmod 700 /home/runner/ssh_key
-          ssh -i ~/ssh_key -o StrictHostKeyChecking=no root@143.198.36.148 << 'EOF'
+          ssh -i ~/ssh_key -o StrictHostKeyChecking=no root@142.93.149.134 << 'EOF'
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd /root/turbo-ci-proj
-            git pull origin main
+            git pull origin production
             npm install -g pnpm
             pnpm install
             pnpm run build
