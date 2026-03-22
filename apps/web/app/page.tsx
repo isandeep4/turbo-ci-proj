@@ -8,8 +8,14 @@ export default async function Home() {
 
   return (
     <div className={styles.page}>
-      {user?.username}
-      {user?.password}
+      <div>
+        <label>User Name:</label>
+        <p>{user?.username}</p>
+      </div>
+      <div>
+        <label>Password:</label>
+        <p>{user?.password}</p>
+      </div>
     </div>
   );
 }
