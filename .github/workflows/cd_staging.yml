@@ -13,11 +13,8 @@ jobs:
       - run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           mkdir -p /home/runner/.ssh
-          ls /home/runner/.ssh
-          touch /home/runner/.ssh/known_hosts
-          echo "${{ secrets.KNOWN_HOSTS }}" &> /home/runner/.ssh/known_hosts
           chmod 700 /home/runner/ssh_key
-          ssh -i ~/ssh_key root@143.198.36.148 -t "cd turbo-ci-proj/ && git pull origin main &&
+          ssh -i ~/ssh_key -o StrictHostKeyChecking=no root@143.198.36.148 -t "cd turbo-ci-proj/ && git pull origin main &&
           export PATH=/root/.nvm/versions/node/v24.13.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin 
           npm install -g pnpm &&
           pnpm install &&
