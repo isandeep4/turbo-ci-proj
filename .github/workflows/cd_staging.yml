@@ -14,9 +14,12 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
           mkdir -p /home/runner/.ssh
           chmod 700 /home/runner/ssh_key
-          ssh -i ~/ssh_key -o StrictHostKeyChecking=no root@143.198.36.148 -t "cd turbo-ci-proj/ && git pull origin main &&
-          export PATH=/root/.nvm/versions/node/v24.13.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin 
-          npm install -g pnpm &&
-          pnpm install &&
-          pnpm run build &&
-          pm2 restart all"
+          ssh -i ~/ssh_key -o StrictHostKeyChecking=no root@143.198.36.148 << 'EOF'
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            cd /root/turbo-ci-proj
+            git pull origin main
+            npm install -g pnpm
+            pnpm install
+            pnpm run build
+            pm2 restart all
