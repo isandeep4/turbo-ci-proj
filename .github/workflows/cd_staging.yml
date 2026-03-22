@@ -18,7 +18,8 @@ jobs:
           echo "${{ secrets.KNOWN_HOSTS }}" &> /home/runner/.ssh/known_hosts
           chmod 700 /home/runner/ssh_key
           ssh -i ~/ssh_key root@143.198.36.148 -t "cd turbo-ci-proj/ && git pull origin main &&
-          export PATH=/root/.nvm/versions/node/v24.13.0/bin:/usr/local/sbin:/usr/local
-          /bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin && npm install -g pnpm && 
-          pnpm install && pnpm run build && pm2 restart http-server && pm2 restart web && 
-          pm2 restart ws-server"
+          export PATH=/root/.nvm/versions/node/v24.13.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin 
+          npm install -g pnpm &&
+          pnpm install &&
+          pnpm run build &&
+          pm2 restart all"
