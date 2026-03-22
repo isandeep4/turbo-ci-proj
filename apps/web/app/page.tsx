@@ -7,7 +7,13 @@ export default async function Home() {
   const user = await client.user.findFirst();
 
   return (
-    <div className={styles.page}>
+    <div className={styles.page} style={{
+      "width": "auto",
+      "display": "flex",
+      "flexWrap": "wrap",
+      "flexDirection": "column",
+      "alignContent": "center",
+    }}>
       <div>
         <label>User Name:</label>
         <p>{user?.username}</p>
