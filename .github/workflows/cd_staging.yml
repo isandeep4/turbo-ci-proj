@@ -12,7 +12,7 @@ jobs:
     steps:
       - run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
-          ssh -i ~/ssh_key root@143.198.36.148
+          ssh -i ~/ssh_key root@143.198.36.148 | echo "yes" 
           cd turbo-ci-proj/ && git pull
           pnpm install
           pnpm run build
